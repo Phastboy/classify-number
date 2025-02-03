@@ -78,7 +78,7 @@ export class AppService {
     }
 
     private async getFunFact(number: number): Promise<string> {
-        const response = await this.httpService
+        const response: AxiosResponse<string> = await this.httpService
             .get(`http://numbersapi.com/${number}`)
             .toPromise();
         if (!response) {

@@ -25,7 +25,7 @@ describe('AppController', () => {
                 number: 7,
                 is_prime: true,
                 is_perfect: false,
-                properties: ['prime', 'odd'],
+                properties: ['prime', 'armstrong', 'odd'],
                 digit_sum: 7,
                 fun_fact: expect.any(String),
             });
@@ -37,7 +37,7 @@ describe('AppController', () => {
                 number: 6,
                 is_prime: false,
                 is_perfect: true,
-                properties: ['perfect', 'even'],
+                properties: ['perfect', 'armstrong', 'even'],
                 digit_sum: 6,
                 fun_fact: expect.any(String),
             });
@@ -61,7 +61,7 @@ describe('AppController', () => {
                 number: 9,
                 is_prime: false,
                 is_perfect: false,
-                properties: ['odd'],
+                properties: ['armstrong', 'odd'],
                 digit_sum: 9,
                 fun_fact: expect.any(String),
             });
