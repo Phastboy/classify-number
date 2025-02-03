@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { HttpModule } from '@nestjs/axios';
 import { AppService } from './app.service';
 import { of } from 'rxjs';
+import { AxiosResponse } from 'axios';
 
 describe('AppService', () => {
     let service: AppService;
@@ -68,7 +69,14 @@ describe('AppService', () => {
 
     describe('getFunFact', () => {
         it('should return a fun fact', async () => {
-            jest.spyOn(service['httpService'], 'get').mockReturnValue(of({ data: 'fun fact' }));
+            const mockResponse: AxiosResponse<unknown, unknown> = {
+                data: 'fun fact',
+                status: 200,
+                statusText: 'OK',
+                headers: {},
+                config: {},
+            };
+            jest.spyOn(service['httpService'], 'get').mockReturnValue(of(mockResponse));
             const funFact = await service['getFunFact'](7);
             expect(funFact).toBe('fun fact');
         });
