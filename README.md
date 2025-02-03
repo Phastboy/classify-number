@@ -32,4 +32,20 @@ API that takes a number and returns an interesting mathematical properties about
     "error": true
   }
   ```
-  
+
+## Docker Instructions
+
+### Build the Docker image
+```sh
+docker build -t classify-number .
+```
+
+### Run the Docker container
+```sh
+docker run -p 3000:3000 classify-number
+```
+
+### Use docker-compose
+```sh
+docker-compose up
+```
