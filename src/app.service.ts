@@ -86,9 +86,9 @@ export class AppService {
             number,
             is_prime: this.isPrime(number),
             is_perfect: this.isPerfect(number),
+            properties: this.properties(number),
             digit_sum: this.digitSum(number),
             fun_fact: funFact,
-            properties: this.properties(number),
         };
     }
 }
