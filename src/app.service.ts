@@ -55,7 +55,17 @@ export class AppService {
         if (this.isPerfect(number)) {
             properties.push('perfect');
         }
+        if (this.isArmstrong(number)) {
+            properties.push('armstrong');
+        }
         return properties;
+    }
+
+    isArmstrong(number: number): boolean {
+        const digits = number.toString().split('');
+        const numDigits = digits.length;
+        const sum = digits.reduce((acc, digit) => acc + Math.pow(parseInt(digit, 10), numDigits), 0);
+        return sum === number;
     }
 
     async classify(

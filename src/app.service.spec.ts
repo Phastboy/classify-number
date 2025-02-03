@@ -102,5 +102,32 @@ describe('AppService', () => {
             expect(service.properties(6)).toContain('perfect');
             expect(service.properties(28)).toContain('perfect');
         });
+
+        it('should return "armstrong" for Armstrong numbers', () => {
+            expect(service.properties(153)).toContain('armstrong');
+            expect(service.properties(370)).toContain('armstrong');
+            expect(service.properties(371)).toContain('armstrong');
+            expect(service.properties(407)).toContain('armstrong');
+        });
+
+        it('should not return "armstrong" for non-Armstrong numbers', () => {
+            expect(service.properties(123)).not.toContain('armstrong');
+            expect(service.properties(456)).not.toContain('armstrong');
+        });
+    });
+
+    describe('isArmstrong', () => {
+        it('should return true for Armstrong numbers', () => {
+            expect(service.isArmstrong(153)).toBe(true);
+            expect(service.isArmstrong(370)).toBe(true);
+            expect(service.isArmstrong(371)).toBe(true);
+            expect(service.isArmstrong(407)).toBe(true);
+        });
+
+        it('should return false for non-Armstrong numbers', () => {
+            expect(service.isArmstrong(123)).toBe(false);
+            expect(service.isArmstrong(456)).toBe(false);
+            expect(service.isArmstrong(789)).toBe(false);
+        });
     });
 });
