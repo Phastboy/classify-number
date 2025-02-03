@@ -1,4 +1,5 @@
-import { Injectable, HttpService } from '@nestjs/common';
+import { HttpService } from '@nestjs/axios';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AppService {
@@ -9,7 +10,12 @@ export class AppService {
         const isPerfect = this.isPerfect(number);
         const isArmstrong = this.isArmstrong(number);
         const digitSum = this.calculateDigitSum(number);
-        const properties = this.getProperties(isPrime, isPerfect, isArmstrong, number);
+        const properties = this.getProperties(
+            isPrime,
+            isPerfect,
+            isArmstrong,
+            number,
+        );
 
         const funFact = await this.getFunFact(number);
 
@@ -41,7 +47,10 @@ export class AppService {
 
     private isArmstrong(number: number): boolean {
         const digits = number.toString().split('');
-        const sum = digits.reduce((acc, digit) => acc + Math.pow(parseInt(digit), digits.length), 0);
+        const sum = digits.reduce(
+            (acc, digit) => acc + Math.pow(parseInt(digit), digits.length),
+            0,
+        );
         return sum === number;
     }
 
@@ -52,7 +61,12 @@ export class AppService {
             .reduce((acc, digit) => acc + parseInt(digit), 0);
     }
 
-    private getProperties(isPrime: boolean, isPerfect: boolean, isArmstrong: boolean, number: number): string[] {
+    private getProperties(
+        isPrime: boolean,
+        isPerfect: boolean,
+        isArmstrong: boolean,
+        number: number,
+    ): string[] {
         const properties = [];
         if (isPrime) properties.push('prime');
         if (isPerfect) properties.push('perfect');
@@ -63,7 +77,9 @@ export class AppService {
     }
 
     private async getFunFact(number: number): Promise<string> {
-        const response = await this.httpService.get(`http://numbersapi.com/${number}`).toPromise();
+        const response = await this.httpService
+            .get(`http://numbersapi.com/${number}`)
+            .toPromise();
         return response.data;
     }
 }
