@@ -6,8 +6,12 @@ import { firstValueFrom } from 'rxjs';
 export class AppService {
     constructor(private readonly httpService: HttpService) {}
 
-    async classify(number: number): Promise<{ number: number; fun_fact: string }> {
-        const response = await firstValueFrom(this.httpService.get(`http://numbersapi.com/${number}`));
+    async classify(
+        number: number,
+    ): Promise<{ number: number; fun_fact: string }> {
+        const response = await firstValueFrom(
+            this.httpService.get(`http://numbersapi.com/${number}`),
+        );
         return {
             number,
             fun_fact: response.data,
