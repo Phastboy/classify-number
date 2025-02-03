@@ -16,10 +16,29 @@ describe('AppController (e2e)', () => {
         await app.init();
     });
 
-    it('/ (GET)', () => {
+    it('/api/classify-number (GET)', () => {
         return request(app.getHttpServer())
-            .get('/')
+            .get('/api/classify-number?number=7')
             .expect(200)
-            .expect('Hello World!');
+            .expect((res) => {
+                expect(res.body).toEqual({
+                    number: 7,
+                    is_prime: true,
+                    fun_fact: expect.any(String),
+                });
+            });
+    });
+
+    it('/api/classify-number (GET) - invalid number', () => {
+        return request(app.getHttpServer())
+            .get('/api/classify-number?number=invalid')
+            .expect(400)
+            .expect((res) => {
+                expect(res.body).toEqual({
+                    statusCode: 400,
+                    message: 'Invalid number parameter',
+                    error: 'Bad Request',
+                });
+            });
     });
 });
