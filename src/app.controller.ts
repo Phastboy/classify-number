@@ -7,6 +7,6 @@ export class AppController {
 
     @Get()
     async classify() {
-        return await this.appService.classify();
+        return await this.appService.classify(6);
     }
 }
