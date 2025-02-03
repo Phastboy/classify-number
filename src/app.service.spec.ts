@@ -74,6 +74,14 @@ describe('AppService', () => {
             const result2 = await service.classify(456);
             expect(result2).toHaveProperty('digit_sum', 15);
         });
+
+        it('should handle negative numbers', async () => {
+            const result = await service.classify(-123);
+            expect(result).toHaveProperty('digit_sum', 6);
+
+            const result2 = await service.classify(-456);
+            expect(result2).toHaveProperty('digit_sum', 15);
+        });
     });
 
     describe('properties', () => {

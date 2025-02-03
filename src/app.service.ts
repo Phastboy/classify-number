@@ -29,7 +29,7 @@ export class AppService {
     }
 
     digitSum(number: number): number {
-        return number
+        return Math.abs(number)
             .toString()
             .split('')
             .reduce((sum, digit) => sum + parseInt(digit, 10), 0);
