@@ -16,6 +16,12 @@ export class AppController {
                 error: true,
             });
         }
-        return await this.appService.classify(parsedNumber);
+        const result = await this.appService.classify(parsedNumber);
+        return {
+            number: result.number,
+            is_prime: result.is_prime,
+            is_perfect: result.is_perfect,
+            fun_fact: result.fun_fact,
+        };
     }
 }

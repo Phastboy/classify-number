@@ -17,6 +17,17 @@ export class AppService {
         return true;
     }
 
+    isPerfect(number: number): boolean {
+        if (number <= 0) return false;
+        let sum = 0;
+        for (let i = 1; i <= number / 2; i++) {
+            if (number % i === 0) {
+                sum += i;
+            }
+        }
+        return sum === number;
+    }
+
     async fetchFunFact(number: number): Promise<string> {
         const response: AxiosResponse<string> = await firstValueFrom(
             this.httpService.get(`http://numbersapi.com/${number}`),
@@ -26,11 +37,12 @@ export class AppService {
 
     async classify(
         number: number,
-    ): Promise<{ number: number; is_prime: boolean; fun_fact: string }> {
+    ): Promise<{ number: number; is_prime: boolean; is_perfect: boolean; fun_fact: string }> {
         const funFact = await this.fetchFunFact(number);
         return {
             number,
             is_prime: this.isPrime(number),
+            is_perfect: this.isPerfect(number),
             fun_fact: funFact,
         };
     }
