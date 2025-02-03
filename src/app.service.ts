@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
+import { AxiosResponse } from 'axios';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable()
@@ -16,16 +17,21 @@ export class AppService {
         return true;
     }
 
+    async fetchFunFact(number: number): Promise<string> {
+        const response: AxiosResponse<string> = await firstValueFrom(
+            this.httpService.get(`http://numbersapi.com/${number}`),
+        );
+        return response.data;
+    }
+
     async classify(
         number: number,
     ): Promise<{ number: number; is_prime: boolean; fun_fact: string }> {
-        const response = await firstValueFrom(
-            this.httpService.get(`http://numbersapi.com/${number}`),
-        );
+        const funFact = await this.fetchFunFact(number);
         return {
             number,
             is_prime: this.isPrime(number),
-            fun_fact: response.data,
+            fun_fact: funFact,
         };
     }
 }
