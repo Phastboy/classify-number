@@ -29,7 +29,7 @@ export class AppService {
     }
 
     digitSum(number: number): number {
-        return number
+        return Math.abs(number)
             .toString()
             .split('')
             .reduce((sum, digit) => sum + parseInt(digit, 10), 0);
@@ -86,9 +86,9 @@ export class AppService {
             number,
             is_prime: this.isPrime(number),
             is_perfect: this.isPerfect(number),
+            properties: this.properties(number),
             digit_sum: this.digitSum(number),
             fun_fact: funFact,
-            properties: this.properties(number),
         };
     }
 }
