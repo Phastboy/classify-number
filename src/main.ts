@@ -24,7 +24,7 @@ async function bootstrap() {
     const document = SwaggerModule.createDocument(app, config, {
         extraModels: [ClassifyNumberResponseDto, BadRequestResponseDto],
     });
-    SwaggerModule.setup('/api/classify-number', app, document);
+    SwaggerModule.setup('/api', app, document);
 
     await app.listen(process.env.PORT ?? 3000);
 }
