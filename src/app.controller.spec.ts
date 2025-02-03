@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 
 describe('AppController', () => {
     let appController: AppController;
+    let appService: AppService;
 
     beforeEach(async () => {
         const app: TestingModule = await Test.createTestingModule({
@@ -12,11 +13,25 @@ describe('AppController', () => {
         }).compile();
 
         appController = app.get<AppController>(AppController);
+        appService = app.get<AppService>(AppService);
     });
 
-    describe('root', () => {
-        it('should return "Hello World!"', () => {
-            expect(appController.getHello()).toBe('Hello World!');
+    describe('classify', () => {
+        it('should return classification with is_prime property', async () => {
+            const number = 7;
+            const result = {
+                number,
+                is_prime: true,
+                fun_fact: '7 is a prime number',
+            };
+
+            jest.spyOn(appService, 'classify').mockImplementation(async () => result);
+
+            expect(await appController.classify(number.toString())).toBe(result);
+        });
+
+        it('should throw BadRequestException for invalid number', async () => {
+            await expect(appController.classify('invalid')).rejects.toThrow('Invalid number parameter');
         });
     });
 });

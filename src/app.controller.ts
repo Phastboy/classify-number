@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Logger, BadRequestException } from '@nestjs/common';
 
@@ -8,8 +8,11 @@ export class AppController {
     logger = new Logger(AppController.name);
 
     @Get()
-    async classify() {
-        const number = 8;
-        return await this.appService.classify(number);
+    async classify(@Query('number') number: string) {
+        const parsedNumber = parseInt(number, 10);
+        if (isNaN(parsedNumber)) {
+            throw new BadRequestException('Invalid number parameter');
+        }
+        return await this.appService.classify(parsedNumber);
     }
 }
