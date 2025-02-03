@@ -21,6 +21,7 @@ export class AppController {
             number: result.number,
             is_prime: result.is_prime,
             is_perfect: result.is_perfect,
+            digit_sum: result.digit_sum,
             fun_fact: result.fun_fact,
         };
     }

@@ -24,6 +24,7 @@ describe('AppController (e2e)', () => {
                 expect(res.body).toEqual({
                     number: 7,
                     is_prime: true,
+                    digit_sum: 7,
                     fun_fact: expect.any(String),
                 });
             });
