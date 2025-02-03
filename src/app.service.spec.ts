@@ -60,15 +60,26 @@ describe('AppService', () => {
 
     describe('getProperties', () => {
         it('should return the correct properties', () => {
-            expect(service['getProperties'](true, false, false, 7)).toEqual(['prime', 'odd']);
-            expect(service['getProperties'](false, true, false, 6)).toEqual(['perfect', 'even']);
-            expect(service['getProperties'](false, false, true, 153)).toEqual(['armstrong', 'odd']);
+            expect(service['getProperties'](true, false, false, 7)).toEqual([
+                'prime',
+                'odd',
+            ]);
+            expect(service['getProperties'](false, true, false, 6)).toEqual([
+                'perfect',
+                'even',
+            ]);
+            expect(service['getProperties'](false, false, true, 153)).toEqual([
+                'armstrong',
+                'odd',
+            ]);
         });
     });
 
     describe('getFunFact', () => {
         it('should return a fun fact', async () => {
-            jest.spyOn(service['httpService'], 'get').mockReturnValue(of({ data: 'fun fact' }));
+            jest.spyOn(service['httpService'], 'get').mockReturnValue(
+                of({ data: 'fun fact' }),
+            );
             const funFact = await service['getFunFact'](7);
             expect(funFact).toBe('fun fact');
         });

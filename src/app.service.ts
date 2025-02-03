@@ -1,5 +1,6 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
+import { AxiosResponse } from 'axios';
 
 @Injectable()
 export class AppService {
@@ -76,7 +77,7 @@ export class AppService {
         return properties;
     }
 
-    private async getFunFact(number: number): Promise<string> {
+    private async getFunFact(number: number): Promise<AxiosResponse<string>> {
         const response = await this.httpService
             .get(`http://numbersapi.com/${number}`)
             .toPromise();
