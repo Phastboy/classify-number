@@ -25,13 +25,19 @@ describe('AppController', () => {
                 fun_fact: '7 is a prime number',
             };
 
-            jest.spyOn(appService, 'classify').mockImplementation(async () => result);
+            jest.spyOn(appService, 'classify').mockImplementation(
+                async () => result,
+            );
 
-            expect(await appController.classify(number.toString())).toBe(result);
+            expect(await appController.classify(number.toString())).toBe(
+                result,
+            );
         });
 
         it('should throw BadRequestException for invalid number', async () => {
-            await expect(appController.classify('invalid')).rejects.toThrow('Invalid number parameter');
+            await expect(appController.classify('invalid')).rejects.toThrow(
+                'Invalid number parameter',
+            );
         });
     });
 });
