@@ -28,6 +28,13 @@ export class AppService {
         return sum === number;
     }
 
+    digitSum(number: number): number {
+        return number
+            .toString()
+            .split('')
+            .reduce((sum, digit) => sum + parseInt(digit, 10), 0);
+    }
+
     async fetchFunFact(number: number): Promise<string> {
         const response: AxiosResponse<string> = await firstValueFrom(
             this.httpService.get(`http://numbersapi.com/${number}`),
@@ -37,12 +44,13 @@ export class AppService {
 
     async classify(
         number: number,
-    ): Promise<{ number: number; is_prime: boolean; is_perfect: boolean; fun_fact: string }> {
+    ): Promise<{ number: number; is_prime: boolean; is_perfect: boolean; digit_sum: number; fun_fact: string }> {
         const funFact = await this.fetchFunFact(number);
         return {
             number,
             is_prime: this.isPrime(number),
             is_perfect: this.isPerfect(number),
+            digit_sum: this.digitSum(number),
             fun_fact: funFact,
         };
     }
