@@ -35,6 +35,12 @@ API that takes a number and returns an interesting mathematical properties about
 
 ## Docker Instructions
 
+### Clone the repository
+```sh
+git clone https://github.com/Phastboy/classify-number.git
+cd classify-number
+```
+
 ### Build the Docker image
 ```sh
 docker build -t classify-number .
