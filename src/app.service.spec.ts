@@ -75,4 +75,32 @@ describe('AppService', () => {
             expect(result2).toHaveProperty('digit_sum', 15);
         });
     });
+
+    describe('properties', () => {
+        it('should return properties for a given number', () => {
+            expect(service.properties(6)).toEqual(['even', 'perfect']);
+            expect(service.properties(7)).toEqual(['odd', 'prime']);
+            expect(service.properties(28)).toEqual(['even', 'perfect']);
+        });
+
+        it('should return "odd" for odd numbers', () => {
+            expect(service.properties(5)).toContain('odd');
+            expect(service.properties(7)).toContain('odd');
+        });
+
+        it('should return "even" for even numbers', () => {
+            expect(service.properties(4)).toContain('even');
+            expect(service.properties(8)).toContain('even');
+        });
+
+        it('should return "prime" for prime numbers', () => {
+            expect(service.properties(5)).toContain('prime');
+            expect(service.properties(7)).toContain('prime');
+        });
+
+        it('should return "perfect" for perfect numbers', () => {
+            expect(service.properties(6)).toContain('perfect');
+            expect(service.properties(28)).toContain('perfect');
+        });
+    });
 });

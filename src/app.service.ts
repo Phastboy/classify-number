@@ -42,9 +42,25 @@ export class AppService {
         return response.data;
     }
 
+    properties(number: number): string[] {
+        const properties: string[] = [];
+        if (number % 2 === 0) {
+            properties.push('even');
+        } else {
+            properties.push('odd');
+        }
+        if (this.isPrime(number)) {
+            properties.push('prime');
+        }
+        if (this.isPerfect(number)) {
+            properties.push('perfect');
+        }
+        return properties;
+    }
+
     async classify(
         number: number,
-    ): Promise<{ number: number; is_prime: boolean; is_perfect: boolean; digit_sum: number; fun_fact: string }> {
+    ): Promise<{ number: number; is_prime: boolean; is_perfect: boolean; digit_sum: number; fun_fact: string; properties: string[] }> {
         const funFact = await this.fetchFunFact(number);
         return {
             number,
@@ -52,6 +68,7 @@ export class AppService {
             is_perfect: this.isPerfect(number),
             digit_sum: this.digitSum(number),
             fun_fact: funFact,
+            properties: this.properties(number),
         };
     }
 }
