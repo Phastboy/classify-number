@@ -2,6 +2,8 @@ import { NestFactory } from '@nestjs/core';
 import { ConsoleLogger } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { ClassifyNumberResponseDto } from './dto/classify-number-response.dto';
+import { BadRequestResponseDto } from './dto/bad-request-response.dto';
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule, {
@@ -19,7 +21,9 @@ async function bootstrap() {
         )
         .setVersion('1.0')
         .build();
-    const document = SwaggerModule.createDocument(app, config);
+    const document = SwaggerModule.createDocument(app, config, {
+        extraModels: [ClassifyNumberResponseDto, BadRequestResponseDto],
+    });
     SwaggerModule.setup('', app, document);
 
     await app.listen(process.env.PORT ?? 3000);

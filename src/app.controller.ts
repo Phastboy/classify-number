@@ -1,13 +1,20 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Logger, BadRequestException } from '@nestjs/common';
+import { ApiTags, ApiQuery, ApiResponse } from '@nestjs/swagger';
+import { ClassifyNumberResponseDto } from './dto/classify-number-response.dto';
+import { BadRequestResponseDto } from './dto/bad-request-response.dto';
 
+@ApiTags('classify-number')
 @Controller('api')
 export class AppController {
     constructor(private readonly appService: AppService) {}
     logger = new Logger(AppController.name);
 
     @Get('classify-number')
+    @ApiQuery({ name: 'number', required: true, type: String })
+    @ApiResponse({ status: 200, description: 'Successful response', type: ClassifyNumberResponseDto })
+    @ApiResponse({ status: 400, description: 'Invalid number parameter', type: BadRequestResponseDto })
     async classify(@Query('number') number: string) {
         const parsedNumber = parseInt(number, 10);
         if (isNaN(parsedNumber)) {
