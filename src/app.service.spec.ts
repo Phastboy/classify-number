@@ -74,7 +74,9 @@ describe('AppService', () => {
                 status: 200,
                 statusText: 'OK',
                 headers: {},
-                config: {},
+                config: {
+                    headers: {},
+                },
             };
             jest.spyOn(service['httpService'], 'get').mockReturnValue(of(mockResponse));
             const funFact = await service['getFunFact'](7);
