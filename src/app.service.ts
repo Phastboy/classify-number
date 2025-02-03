@@ -68,7 +68,7 @@ export class AppService {
         isArmstrong: boolean,
         number: number,
     ): string[] {
-        const properties = [];
+        const properties: string[] = [];
         if (isPrime) properties.push('prime');
         if (isPerfect) properties.push('perfect');
         if (isArmstrong) properties.push('armstrong');
@@ -77,10 +77,13 @@ export class AppService {
         return properties;
     }
 
-    private async getFunFact(number: number): Promise<AxiosResponse<string>> {
+    private async getFunFact(number: number): Promise<string> {
         const response = await this.httpService
             .get(`http://numbersapi.com/${number}`)
             .toPromise();
+        if (!response) {
+            throw new Error('Failed to fetch fun fact');
+        }
         return response.data;
     }
 }
