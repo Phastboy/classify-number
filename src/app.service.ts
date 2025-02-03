@@ -24,6 +24,7 @@ export class AppService {
             number,
             is_prime: isPrime,
             is_perfect: isPerfect,
+            is_armstrong: isArmstrong,
             properties,
             digit_sum: digitSum,
             fun_fact: funFact,
