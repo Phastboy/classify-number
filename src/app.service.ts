@@ -64,13 +64,23 @@ export class AppService {
     isArmstrong(number: number): boolean {
         const digits = number.toString().split('');
         const numDigits = digits.length;
-        const sum = digits.reduce((acc, digit) => acc + Math.pow(parseInt(digit, 10), numDigits), 0);
+        const sum = digits.reduce(
+            (acc, digit) => acc + Math.pow(parseInt(digit, 10), numDigits),
+            0,
+        );
         return sum === number;
     }
 
     async classify(
         number: number,
-    ): Promise<{ number: number; is_prime: boolean; is_perfect: boolean; digit_sum: number; fun_fact: string; properties: string[] }> {
+    ): Promise<{
+        number: number;
+        is_prime: boolean;
+        is_perfect: boolean;
+        digit_sum: number;
+        fun_fact: string;
+        properties: string[];
+    }> {
         const funFact = await this.fetchFunFact(number);
         return {
             number,
