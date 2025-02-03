@@ -49,3 +49,12 @@ docker run -p 3000:3000 classify-number
 ```sh
 docker-compose up
 ```
+
+## Swagger API Documentation
+
+The API documentation is available via Swagger. To access the Swagger UI, follow these steps:
+
+1. Start the application using one of the Docker instructions above.
+2. Open your web browser and navigate to `http://localhost:3000`.
+
+You will see the Swagger UI, which provides detailed information about the API endpoints, request parameters, and response formats.
