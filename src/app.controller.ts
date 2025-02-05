@@ -17,7 +17,7 @@ export class AppController {
     logger = new Logger(AppController.name);
 
     @Get('classify-number')
-    @ApiQuery({ name: 'number', required: true, type: String })
+    @ApiQuery({ name: 'number', required: false, type: String })
     @ApiOkResponse({
         description: 'Successful response',
         type: ClassifyNumberResponseDto,
@@ -26,11 +26,18 @@ export class AppController {
         description: 'Invalid number parameter',
         type: BadRequestResponseDto,
     })
-    async classify(@Query('number') number: string) {
+    async classify(@Query('number') number?: string) {
+        if (!number) {
+            throw new BadRequestException({
+                number: '',
+                error: true,
+            });
+        }
+
         const parsedNumber = parseInt(number, 10);
         if (isNaN(parsedNumber)) {
             throw new BadRequestException({
-                number: 'alphabet',
+                number: number,
                 error: true,
             });
         }

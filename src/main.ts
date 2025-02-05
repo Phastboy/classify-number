@@ -20,6 +20,16 @@ async function bootstrap() {
             'API that takes a number and returns an interesting mathematical properties about it, along with a fun fact.',
         )
         .setVersion('1.0')
+        .addResponse('400', {
+            description: 'Invalid number parameter',
+            content: {
+                'application/json': {
+                    schema: {
+                        $ref: '#/components/schemas/BadRequestResponseDto',
+                    },
+                },
+            },
+        })
         .build();
     const document = SwaggerModule.createDocument(app, config, {
         extraModels: [ClassifyNumberResponseDto, BadRequestResponseDto],

@@ -36,9 +36,20 @@ describe('AppController (e2e)', () => {
             .expect(400)
             .expect((res) => {
                 expect(res.body).toEqual({
-                    statusCode: 400,
-                    message: 'Invalid number parameter',
-                    error: 'Bad Request',
+                    error: true,
+                    number: 'invalid',
+                });
+            });
+    });
+
+    it('/api/classify-number (GET) - missing query parameter', () => {
+        return request(app.getHttpServer())
+            .get('/api/classify-number')
+            .expect(400)
+            .expect((res) => {
+                expect(res.body).toEqual({
+                    error: true,
+                    number: '',
                 });
             });
     });
