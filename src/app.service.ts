@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { AxiosResponse } from 'axios';
 import { firstValueFrom } from 'rxjs';
@@ -6,6 +6,8 @@ import { firstValueFrom } from 'rxjs';
 @Injectable()
 export class AppService {
     constructor(private readonly httpService: HttpService) {}
+
+    private logger = new Logger(AppService.name);
 
     isPrime(number: number): boolean {
         if (number <= 1) return false;
@@ -49,12 +51,6 @@ export class AppService {
         } else {
             properties.push('odd');
         }
-        if (this.isPrime(number)) {
-            properties.push('prime');
-        }
-        if (this.isPerfect(number)) {
-            properties.push('perfect');
-        }
         if (this.isArmstrong(number)) {
             properties.push('armstrong');
         }
@@ -62,18 +58,18 @@ export class AppService {
     }
 
     isArmstrong(number: number): boolean {
-        const digits = number.toString().split('');
+        const digits = Math.abs(number).toString().split('');
+        this.logger.log(digits);
         const numDigits = digits.length;
         const sum = digits.reduce(
             (acc, digit) => acc + Math.pow(parseInt(digit, 10), numDigits),
             0,
         );
-        return sum === number;
+        this.logger.log({ armstrong: sum === Math.abs(number) });
+        return sum === Math.abs(number);
     }
 
-    async classify(
-        number: number,
-    ): Promise<{
+    async classify(number: number): Promise<{
         number: number;
         is_prime: boolean;
         is_perfect: boolean;
