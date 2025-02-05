@@ -46,13 +46,13 @@ export class AppService {
 
     properties(number: number): string[] {
         const properties: string[] = [];
+        if (this.isArmstrong(number)) {
+            properties.push('armstrong');
+        }
         if (number % 2 === 0) {
             properties.push('even');
         } else {
             properties.push('odd');
-        }
-        if (this.isArmstrong(number)) {
-            properties.push('armstrong');
         }
         return properties;
     }
