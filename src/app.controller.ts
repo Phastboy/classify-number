@@ -30,7 +30,7 @@ export class AppController {
         const parsedNumber = parseInt(number, 10);
         if (isNaN(parsedNumber)) {
             throw new BadRequestException({
-                number: 'alphabet',
+                number: number,
                 error: true,
             });
         }
