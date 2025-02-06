@@ -24,7 +24,25 @@ describe('AppController (e2e)', () => {
                 expect(res.body).toEqual({
                     number: 7,
                     is_prime: true,
+                    is_perfect: false,
+                    properties: ['odd'],
                     digit_sum: 7,
+                    fun_fact: expect.any(String),
+                });
+            });
+    });
+
+    it('/api/classify-number (GET) - negative number', () => {
+        return request(app.getHttpServer())
+            .get('/api/classify-number?number=-5')
+            .expect(200)
+            .expect((res) => {
+                expect(res.body).toEqual({
+                    number: -5,
+                    is_prime: false,
+                    is_perfect: false,
+                    properties: ['odd'],
+                    digit_sum: 5,
                     fun_fact: expect.any(String),
                 });
             });

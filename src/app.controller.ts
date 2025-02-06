@@ -27,7 +27,7 @@ export class AppController {
         type: BadRequestResponseDto,
     })
     async classify(@Query('number') number: string) {
-        if (!/^\d+$/.test(number)) {
+        if (!/^-?\d+$/.test(number)) {
             throw new BadRequestException({ 
                 error: true,
                 number: number,

@@ -22,12 +22,12 @@ export class AppService {
     isPerfect(number: number): boolean {
         if (number <= 0) return false;
         let sum = 0;
-        for (let i = 1; i <= number / 2; i++) {
+        for (let i = 1; i <= Math.abs(number) / 2; i++) {
             if (number % i === 0) {
                 sum += i;
             }
         }
-        return sum === number;
+        return sum === Math.abs(number);
     }
 
     digitSum(number: number): number {
