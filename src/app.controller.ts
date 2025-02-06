@@ -29,9 +29,9 @@ export class AppController {
     async classify(@Query('number') number: string) {
         const parsedNumber = parseInt(number, 10);
         if (isNaN(parsedNumber)) {
-            throw new BadRequestException({
-                number: number,
+            throw new BadRequestException({ 
                 error: true,
+                number: number,
             });
         }
         return await this.appService.classify(parsedNumber);
