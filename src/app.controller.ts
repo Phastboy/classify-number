@@ -27,13 +27,13 @@ export class AppController {
         type: BadRequestResponseDto,
     })
     async classify(@Query('number') number: string) {
-        const parsedNumber = parseInt(number, 10);
-        if (isNaN(parsedNumber)) {
+        if (!/^\d+$/.test(number)) {
             throw new BadRequestException({ 
                 error: true,
                 number: number,
             });
         }
+        const parsedNumber = parseInt(number, 10);
         return await this.appService.classify(parsedNumber);
     }
 }

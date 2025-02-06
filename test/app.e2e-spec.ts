@@ -42,4 +42,43 @@ describe('AppController (e2e)', () => {
                 });
             });
     });
+
+    it('/api/classify-number (GET) - invalid number with letters', () => {
+        return request(app.getHttpServer())
+            .get('/api/classify-number?number=2abc')
+            .expect(400)
+            .expect((res) => {
+                expect(res.body).toEqual({
+                    statusCode: 400,
+                    message: 'Invalid number parameter',
+                    error: 'Bad Request',
+                });
+            });
+    });
+
+    it('/api/classify-number (GET) - invalid number with letters at the end', () => {
+        return request(app.getHttpServer())
+            .get('/api/classify-number?number=23c')
+            .expect(400)
+            .expect((res) => {
+                expect(res.body).toEqual({
+                    statusCode: 400,
+                    message: 'Invalid number parameter',
+                    error: 'Bad Request',
+                });
+            });
+    });
+
+    it('/api/classify-number (GET) - invalid number with only letters', () => {
+        return request(app.getHttpServer())
+            .get('/api/classify-number?number=abc')
+            .expect(400)
+            .expect((res) => {
+                expect(res.body).toEqual({
+                    statusCode: 400,
+                    message: 'Invalid number parameter',
+                    error: 'Bad Request',
+                });
+            });
+    });
 });
